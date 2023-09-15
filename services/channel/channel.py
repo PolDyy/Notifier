@@ -23,9 +23,12 @@ class ChannelInterface:
         return channel
 
     @classmethod
-    def get_messages(cls, unique_hash):
+    def get_messages(cls, unique_hash, user_id):
         channel = cls.get_channel(unique_hash)
         if channel is None:
+            return
+        is_member = channel.members.filter(id=user_id).exists()
+        if not is_member:
             return
         messages = Message.objects.select_related(
             'owner',

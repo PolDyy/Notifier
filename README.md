@@ -52,3 +52,18 @@ ______________________
 
 В методах отправки сообщений на почту оставил print, чтобы сообщение выводилось в консоль,  
 чтобы для проверки не нужно было настраивать SMTP не обязательно
+
+## Эндпоинты
+
+|   | uri                              | Methods |      Access level | Description                               |
+|---|----------------------------------|:-------:|------------------:|-------------------------------------------|
+| 1 | auth/                            |   GET   |         all users | Для получения страницы входа              |
+| 2 | api/auth/send-email/             |  POST   |         all users | Для отправки сообщения с ссылкой на почту |
+| 3 | api/auth/login/<str:unique_hash> |   GET   |         all users | Для аутентификации                        |
+| 4 | api/auth/refresh                 |   GET   |   IsAuthenticated | Для обновления токена                     |
+| 5 | message/<str:unique_hash>        |   GET   |   IsAuthenticated | Для получения всех сообщений канала       |
+| 6 | channel/                         |  POST   |   IsAuthenticated | Создание канала                           |
+| 7 | channel/                         |   GET   |   IsAuthenticated | Получение списка каналов                  |
+| 8 | channel/<str:unique_hash>        |   GET   |   IsAuthenticated | Получение канала                          |
+| 8 | channel/<str:unique_hash>        |  PATCH  |   IsAuthenticated | Запрос на вход в канал                    |
+| 9 | add/<str:token>                  |   GET   |   IsAuthenticated | Для подтверждения входа в закрытый канал  |

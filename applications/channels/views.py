@@ -23,7 +23,8 @@ class MessageView(drf_view.APIView):
 
     def get(self, request: Request, unique_hash):
         """Получить сообщения."""
-        messages = ChannelInterface.get_messages(unique_hash)
+        user_id = request.user.id
+        messages = ChannelInterface.get_messages(unique_hash, user_id)
         if messages is None:
             return Response(
                 {'detail': 'Сообщений по данному чату не найдено'},
@@ -73,7 +74,7 @@ class ChannelDetailAPIView(
         )
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def add_user_to_channel(request: Request, unique_hash):
     payload = json.loads(get_hash_value(unique_hash))

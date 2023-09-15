@@ -4,7 +4,7 @@ from applications.channels import views
 
 urlpatterns = [
     path(
-        'message/',
+        'message/<str:unique_hash>',
         views.MessageView.as_view(),
         name='message',
     ),
