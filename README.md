@@ -1,40 +1,54 @@
-# Django Project Template
+# Notifier
 
-It's very simple start point for django project.
+Сервис уведомлений
+______________________
 
-For `Django >= 3.0` compatible with `Python >= 3.6`. `Node ~= 16.13`.
+## Запуск проекта
 
-## Install
+1) Клонировать репозиторий и перейти в него в командной строке:
+    
+    `git init`
 
-	django-admin startproject project_name --template=https://github.com/1vank1n/django-project-template/archive/master.zip
-	pip install -r requirements/base.txt
-	npm i
+    `git clone https://github.com/PolDyy/Notifier.git`
 
-## Usage
+2) Cоздать и активировать виртуальное окружение в корне проекта:
 
-### Server (one terminal tab)
-	python manage.py runserver
+    `python -m venv venv`
 
-### Frontend (other terminal tab)
-	npm start
+    `source venv/Scripts/activate` или `source venv/bin/activate`
+
+3) Установить зависимости:
+
+    `python -m pip install --upgrade pip`
+
+    `pip install -r requirements/base.txt`
+
+4) Создаем файл .env на основе env_example.txt
+
+5) Активируем докер окружение: 
+
+    `docker compose up -d --build`
+
+6) Проводим миграции
+
+## Для запуска frontend
+
+1) Установить node.js (https://nodejs.org/en/download/).
+
+2) Перейти в директорию frontend.
+
+    `cd frontend/`
+
+3) Установить зависимости:
+
+    `npm install`
+
+4) Скомпелировать assets:
+
+    `npm start`
 
 
-## Structure
+## Примечание 
 
-Recommend installation virtualenv in `.env` folder in project folder.
-
-```
-/.env	- virtualenv
-/.git
-/applications - folder for django applications
----/main      - start app point that I offer for you
-/frontend     - folder for source "frontend" files
----/images    - gulp tasks look at this folder, files get->optimize->put to `/static/images/`
----/scripts   - gulp tasks look at this folder, files get->minify->put to `/static/scripts/`
----/styles    - gulp tasks look at this folder, get _common.styl->optimize->put to `/static/styles/base.css`
-/requirements - requirements for current project
-/settings     - django settings
-/tasks        - gulp tasks
-```
-
-Any question? Create issue or type me to email = lukyanets.ivan@gmail.com
+В методах отправки сообщений на почту оставил print, чтобы сообщение выводилось в консоль,  
+чтобы для проверки не нужно было настраивать SMTP не обязательно

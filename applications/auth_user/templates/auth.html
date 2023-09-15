@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid  bg-primary vh-100 vw-100">
+    <div class="container-sm cont__position">
+        <div class="row justify-content-center ">
+            <div class="col-lg-4 text-center">
+                <p class="fs-5 fw-bold text-light">
+                    Аутентификация
+                </p>
+            </div>
+        </div>
+        <form id="auth-form" novalidate>
+           {% csrf_token %}
+            <div class="row justify-content-center align-items-center">
+               <div class="col-lg-4 col-md-8">
+                   <label for="email" class="text-light pb-2">Email:</label>
+                   <input type="email" class="form-control p-2 mb-3" id="email" name="email" placeholder="Введите Email" required>
+               </div>
+                <div class="col-12"></div>
+                <div class="col-lg-4 col-md-8">
+                    <button type="submit" class="btn btn-success w-50 p-2 ">ВойтиЫ</button>
+                </div>
+            </div>
+
+        </form>
+        <div class="row  justify-content-center mt-3 text-center fw-bold text-light">
+            <div id="response-message" class="col-lg-4 col-md-8 "></div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer_js%}
+<script>
+   $(document).ready(function() {
+       $("#auth-form").on("submit", function(event) {
+           event.preventDefault();
+
+           var formData = $(this).serialize();
+
+
+           $.ajax({
+               type: "POST",
+               url: "/api/auth/send-email/",
+               data: formData,
+               dataType: "json",
+               success: function(data) {
+                   if (data.success) {
+                       $("#response-message").html(data.message);
+                   } else {
+                       $("#response-message").html(data.message);
+                   }
+               },
+               error: function(xhr, errmsg, err) {
+                   console.log(xhr.status + ": " + xhr.responseText);
+               }
+           });
+       });
+   });
+</script>
+{% endblock footer_js%}
