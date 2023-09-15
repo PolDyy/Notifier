@@ -1,17 +1,14 @@
-import hashlib
-
 from django.db import models
 from django.utils import timezone
 
 from applications.core.models import Date
+from services.hash.hash import generate_hash
 
 
 class ChannelManager(models.Manager):
 
     def create_channel(self, name, owner, is_open=True):
-        unique_hash = hashlib.sha256(
-            name.encode(),
-        ).hexdigest()
+        unique_hash = generate_hash(name)
         channel = self.create(
             name=name,
             unique_hash=unique_hash,
@@ -47,6 +44,9 @@ class Channel(Date):
 
     objects = ChannelManager()
 
+    class Meta:
+        db_table = 'channels'
+
     def __str__(self):
         return self.name
 
@@ -69,3 +69,4 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        db_table = 'messages'

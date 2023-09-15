@@ -25,7 +25,7 @@ class MessageView(drf_view.APIView):
         """Получить сообщения."""
         user_id = request.user.id
         messages = ChannelInterface.get_messages(unique_hash, user_id)
-        if messages is None:
+        if not messages:
             return Response(
                 {'detail': 'Сообщений по данному чату не найдено'},
                 status=status.HTTP_404_NOT_FOUND,

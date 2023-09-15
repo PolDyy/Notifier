@@ -20,8 +20,8 @@ def create_user_if_not_exists(email: str):
 
 def update_user_device(request):
     user = request.user
-    user_agent = parse(request.headers['User-Agent'])
-    device = user_agent.platform
+    user_agent = parse(request.META.get('HTTP_USER_AGENT'))
+    device = user_agent.device.family
     ip_address = request.META.get('REMOTE_ADDR')
     user.device = device
     user.ip = ip_address
