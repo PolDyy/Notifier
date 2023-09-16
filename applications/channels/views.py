@@ -89,7 +89,6 @@ def add_user_to_channel(request: Request, unique_hash):
         user_email=email,
         unique_hash=unique_hash,
     )
-    update_user_device(request)
     if channel is None:
         return Response(
             {'detail': message},
