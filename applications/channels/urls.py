@@ -36,7 +36,7 @@ urlpatterns = [
         'add/<str:unique_hash>',
         views.AddUserToChannelViewSet.as_view(
             {
-                'patch': 'partial_update',
+                'get': 'retrieve',
             }
         ),
         name='add_to_close_channel',

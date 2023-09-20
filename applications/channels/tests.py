@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase, APIRequestFactory
+from rest_framework.test import APITestCase
 
 from applications.auth_user.models import CustomUser
 from .models import Channel, Message
@@ -82,7 +82,7 @@ class AddUserToChannelViewSetTest(APITestCase):
         }
         mock_get_hash_value.return_value = json.dumps(payload)
         url = reverse('add_to_close_channel', kwargs={'unique_hash': self.unique_hash})
-        response = self.client.patch(url, format='json')
+        response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

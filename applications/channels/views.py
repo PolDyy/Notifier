@@ -75,12 +75,12 @@ class ChannelDetailViewSet(
 
 
 class AddUserToChannelViewSet(
-    drf_mixins.UpdateModelMixin,
+    drf_mixins.RetrieveModelMixin,
     GenericViewSet,
 ):
     permission_classes = [IsAuthenticated]
 
-    def partial_update(self, request, *args, **kwargs):
+    def retrieve(self, request, *args, **kwargs):
         unique_hash = kwargs.get('unique_hash')
         payload = json.loads(get_hash_value(unique_hash))
         email = payload.get('email')
