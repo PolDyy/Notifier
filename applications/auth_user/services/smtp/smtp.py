@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
-from services.hash.hash import generate_hash_for_login, generate_hash_close_channel
+from applications.auth_user.services.hash.hash import generate_hash_for_login, generate_hash_close_channel
 
 
 class EmailSending:
@@ -14,7 +14,10 @@ class EmailSending:
     }
 
     @classmethod
-    def send_auth_email(cls, email_to_sent: str):
+    def send_auth_email(
+        cls,
+        email_to_sent: str
+    ) -> None:
         """Функция отправки сообщения для входа."""
 
         unique_hash = generate_hash_for_login(email_to_sent)
@@ -34,12 +37,13 @@ class EmailSending:
 
     @classmethod
     def send_to_channel_owner(
-            cls,
-            email_to_sent: str,
-            user_email: str,
-            channel_name: str,
-            channel_hash: str
-    ):
+        cls,
+        email_to_sent: str,
+        user_email: str,
+        channel_name: str,
+        channel_hash: str
+    ) -> None:
+        """Функция отправки сообщения создателю канала."""
         unique_hash = generate_hash_close_channel(user_email, channel_hash)
         data = {
             'unique_hash': unique_hash,

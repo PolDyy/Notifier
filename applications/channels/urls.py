@@ -5,7 +5,11 @@ from applications.channels import views
 urlpatterns = [
     path(
         'message/<str:unique_hash>',
-        views.MessageView.as_view(),
+        views.MessageViewSet.as_view(
+            {
+                'get': 'list',
+            },
+        ),
         name='message',
     ),
     path(
@@ -20,12 +24,21 @@ urlpatterns = [
     ),
     path(
         'channel/<str:unique_hash>',
-        views.ChannelDetailAPIView.as_view(),
+        views.ChannelDetailViewSet.as_view(
+            {
+                'get': 'retrieve',
+                'patch': 'partial_update',
+            }
+        ),
         name='channel-detail',
     ),
     path(
-        'add/<str:token>',
-        views.add_user_to_channel,
+        'add/<str:unique_hash>',
+        views.AddUserToChannelViewSet.as_view(
+            {
+                'patch': 'partial_update',
+            }
+        ),
         name='add_to_close_channel',
     ),
 ]

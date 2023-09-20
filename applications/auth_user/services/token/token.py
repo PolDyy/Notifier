@@ -1,10 +1,11 @@
 import datetime
+
 import jwt
 from django.conf import settings
 
 
-def generate_access_token(email: str):
-
+def generate_access_token(email: str) -> str:
+    """Функция генерации access токена."""
     access_token_payload = {
         'email': email,
         'exp': datetime.datetime.utcnow() + settings.ACCESS_TOKEN_LIFETIME,
@@ -18,7 +19,8 @@ def generate_access_token(email: str):
     return access_token
 
 
-def generate_refresh_token(email: str):
+def generate_refresh_token(email: str) -> str:
+    """Функция генерации refresh токена."""
     refresh_token_payload = {
         'email': email,
         'exp': datetime.datetime.utcnow() + settings.REFRESH_TOKEN_LIFETIME,
@@ -32,7 +34,8 @@ def generate_refresh_token(email: str):
 
     return refresh_token
 
-def get_jwt_payload(token):
+
+def get_jwt_payload(token: str) -> None | dict:
     try:
         payload_jwt = jwt.decode(
             token,

@@ -12,6 +12,10 @@ urlpatterns = [
     ),
     path(
         '',
+        include('applications.main.urls'),
+    ),
+    path(
+        'api/auth/',
         include('applications.auth_user.urls'),
     ),
     path(

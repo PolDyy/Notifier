@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils import timezone
 
+from applications.auth_user.models import CustomUser
 from applications.core.models import Date
-from services.hash.hash import generate_hash
+from applications.auth_user.services.hash.hash import generate_hash
 
 
 class ChannelManager(models.Manager):
 
-    def create_channel(self, name, owner, is_open=True):
+    def create_channel(self, name: str, owner: CustomUser, is_open=True):
         unique_hash = generate_hash(name)
         channel = self.create(
             name=name,

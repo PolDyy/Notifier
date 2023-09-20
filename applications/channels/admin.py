@@ -8,10 +8,11 @@ class ChannelAdmin(admin.ModelAdmin):
     list_display = ('name', 'unique_hash', 'is_open', 'owner')
     list_filter = ('owner', 'is_open',)
     fieldsets = (
-        (None, {'fields': ('name', 'unique_hash', 'is_open', )}),
+        (None, {'fields': ('name', 'unique_hash', 'is_open', 'owner')}),
         ('Dates', {'fields': ('created', 'modified')}),
     )
 
+    raw_id_fields = ('owner',)
     search_fields = ('unique_hash',)
     ordering = ('created',)
     readonly_fields = ('created', 'modified')
@@ -26,5 +27,6 @@ class MessageAdmin(admin.ModelAdmin):
         ('Dates', {'fields': ('created_at', )}),
     )
 
+    raw_id_fields = ('owner', 'channel')
     search_fields = ('owner', 'channel')
 

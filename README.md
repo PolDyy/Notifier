@@ -57,7 +57,7 @@ ______________________
 
 |   | uri                              | Methods |      Access level | Description                               |
 |---|----------------------------------|:-------:|------------------:|-------------------------------------------|
-| 1 | auth/                            |   GET   |         all users | Для получения страницы входа              |
+| 1 | /                                |   GET   |         all users | Для получения страницы входа              |
 | 2 | api/auth/send-email/             |  POST   |         all users | Для отправки сообщения с ссылкой на почту |
 | 3 | api/auth/login/<str:unique_hash> |   GET   |         all users | Для аутентификации                        |
 | 4 | api/auth/refresh                 |   GET   |   IsAuthenticated | Для обновления токена                     |

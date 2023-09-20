@@ -6,7 +6,7 @@ import string
 from django.core.cache import cache
 
 
-def generate_random_string():
+def generate_random_string() -> str:
     characters = string.ascii_letters + string.digits
 
     random_string = ''.join(
@@ -15,7 +15,7 @@ def generate_random_string():
     return random_string
 
 
-def generate_hash(key_word: str):
+def generate_hash(key_word: str) -> str:
     unique_hash = hashlib.sha256(
         (key_word + generate_random_string()).encode(),
         ).hexdigest()
@@ -23,7 +23,10 @@ def generate_hash(key_word: str):
     return unique_hash
 
 
-def generate_hash_close_channel(email: str, chat_hash: str):
+def generate_hash_close_channel(
+    email: str,
+    chat_hash: str
+) -> str:
     unique_hash = hashlib.sha256(
         (email + generate_random_string()).encode(),
         ).hexdigest()
@@ -35,7 +38,7 @@ def generate_hash_close_channel(email: str, chat_hash: str):
     return unique_hash
 
 
-def generate_hash_for_login(email: str):
+def generate_hash_for_login(email: str) -> str:
     unique_hash = hashlib.sha256(
         (email + generate_random_string()).encode(),
     ).hexdigest()

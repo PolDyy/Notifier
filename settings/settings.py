@@ -181,9 +181,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'applications.core.verify.JWTAuthentication',
     ),
-    'DEFAULT_PAGINATION_CLASS': (
-        'applications.core.pagination.StandardPagination',
-    )
+    'DEFAULT_PAGINATION_CLASS': 'applications.core.pagination.StandardPagination'
 }
 
 AUTH_USER_MODEL = 'auth_user.CustomUser'

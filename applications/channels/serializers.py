@@ -1,6 +1,6 @@
 from django.urls import reverse
-
 from rest_framework import serializers
+
 from .models import Message, Channel
 
 
@@ -58,9 +58,10 @@ class ChannelSerializer(serializers.ModelSerializer):
         channel = Channel.objects.create_channel(
             name=validated_data.get('name'),
             owner=user,
-            is_open=validated_data.get('is_open')
+            is_open=validated_data.get('is_open') or True
         )
         return channel
+
 
 class HashSerializer(serializers.Serializer):
     unique_hash = serializers.CharField(

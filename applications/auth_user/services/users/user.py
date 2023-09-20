@@ -1,10 +1,11 @@
 from django.core.exceptions import ObjectDoesNotExist
-
-from applications.auth_user.models import CustomUser
+from rest_framework.request import Request
 from user_agents import parse
 
+from applications.auth_user.models import CustomUser
 
-def get_user_by_email(email: str):
+
+def get_user_by_email(email: str) -> CustomUser | None:
     try:
         user = CustomUser.objects.get(email=email)
     except ObjectDoesNotExist:
@@ -12,13 +13,13 @@ def get_user_by_email(email: str):
     return user
 
 
-def create_user_if_not_exists(email: str):
+def create_user_if_not_exists(email: str) -> None:
     user = get_user_by_email(email)
     if user is None:
         CustomUser.objects.create_user(email)
 
 
-def update_user_device(request):
+def update_user_device(request: Request) -> None:
     user = request.user
     user_agent = parse(request.META.get('HTTP_USER_AGENT'))
     device = user_agent.device.family

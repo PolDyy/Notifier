@@ -1,8 +1,9 @@
-from rest_framework.authentication import BaseAuthentication
 from django.middleware.csrf import CsrfViewMiddleware
 from rest_framework import exceptions
+from rest_framework.authentication import BaseAuthentication
+
 from applications.auth_user.models import CustomUser
-from services.token.token import get_jwt_payload
+from applications.auth_user.services.token.token import get_jwt_payload
 
 
 class CSRFCheck(CsrfViewMiddleware):

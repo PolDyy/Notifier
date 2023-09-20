@@ -29,9 +29,9 @@
 
 	{% block content %}{% endblock content %}
 
-	<script src="{% static 'scripts/base.js' %}"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{% static 'scripts/base.js' %}"></script>
 	{% block footer_js %}{% endblock footer_js %}
 
 	{{ preference.footer_html|safe }}
